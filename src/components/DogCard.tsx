@@ -108,10 +108,8 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
               </div>
 
               <p className="text-sm text-[#6E5A9A]">
-                {dog.size} Dachshund · {formatAge(dog.ageYears)}
+                {dog.coat}· {dog.size} · {formatAge(dog.ageYears)}
               </p>
-
-              <p className="text-xs text-[#8A7BAF]">{dog.coat}</p>
 
               <p className="text-xs text-[#8A7BAF]">{getBreederLabel(dog)}</p>
 
@@ -129,9 +127,6 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
               <h3 className="text-base font-semibold text-[#3C1775]">
                 No dog currently
               </h3>
-              <p className="mt-1 text-sm text-[#8A7BAF]">
-                This owner is currently without a dog.
-              </p>
             </div>
           </section>
         )}
@@ -156,24 +151,28 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
             <button
   type="button"
   aria-label="Message owner"
-  className="flex h-10 w-10 items-center justify-center rounded-full transition"
+  className="flex h-10 w-10 items-center justify-center transition hover:brightness-90"
   style={{
-    backgroundColor: "#FF785A"
+    backgroundColor: "#FF785A",
+    borderRadius: "8px"
   }}
 >
-  <svg
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="#FFFFFF"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M21 11.5a8.38 8.38 0 0 1-1.9 5.4 8.5 8.5 0 0 1-6.6 3.1 8.38 8.38 0 0 1-5.4-1.9L3 21l2.9-4.1A8.38 8.38 0 0 1 4 11.5a8.5 8.5 0 0 1 3.1-6.6A8.38 8.38 0 0 1 12.5 3a8.5 8.5 0 0 1 6.6 3.1A8.38 8.38 0 0 1 21 11.5z" />
-  </svg>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="white"
+  strokeWidth="2"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+>
+  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+</svg>
+
 </button>
+
 
           </div>
 
