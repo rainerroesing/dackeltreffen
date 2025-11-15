@@ -22,7 +22,7 @@ const mockCards: DogCardProps[] = [
       name: "Leon",
       age: 35,
       gender: "male",
-      needs: ["Looking for dogsitter", "Playdates", "Lorem"]
+      needs: ["Looking for dogsitter"]
     },
     location: {
       district: "Milbertshofen",
@@ -43,7 +43,7 @@ const mockCards: DogCardProps[] = [
       name: "Leon",
       age: 35,
       gender: "male",
-      needs: ["Looking for dogsitter", "Playdates", "Lorem"]
+      needs: ["Looking for dogsitter"]
     },
     location: {
       district: "Milbertshofen",
@@ -67,8 +67,8 @@ const mockCards: DogCardProps[] = [
 
 export default function DogCardGrid() {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-10">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <section className="mx-auto max-w-6xl px-4 pr-8 py-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-1 xl:grid-cols-1">
         {mockCards.map((card, idx) => (
           <DogCard key={idx} {...card} />
         ))}

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import LogoIcon from "./LogoIcon";
 
 const navItems = [
   { label: "Dackel", href: "/" },       // Home
@@ -20,10 +21,10 @@ export default function MainHeader() {
 
   return (
     <header
-      className="sticky top-0 z-30 backdrop-blur border-b"
+    className="fixed inset-x-0 top-0 z-[1000] bg-white border-b border-[#E0D4FF]"
       style={{ background: "#FFFFFF", borderColor: border }}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4">
+      <div className="mx-auto flex h-16 max-w-6xl items-center px-4">
         {/* BURGER BUTTON – mobile */}
         <button
           type="button"
@@ -39,20 +40,16 @@ export default function MainHeader() {
         </button>
 
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-2">
-          <div
-            className="flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold text-white"
-            style={{ background: "#B9A2FF" }}
-          >
-            🐶
-          </div>
-          <span
-            className="text-base font-semibold tracking-tight"
-            style={{ color: text }}
-          >
-            Dackeltreffen.de
-          </span>
-        </Link>
+  <Link href="/" className="flex items-center gap-3">
+  <LogoIcon className="h-8 w-auto" />
+  <span
+    className="text-base font-gazpacho tracking-tight"
+    style={{ color: text }}
+  >
+    Dackeltreffen.de
+  </span>
+</Link>
+
 
         {/* DESKTOP NAV */}
         <nav className="ml-4 hidden items-center gap-3 text-sm md:flex">

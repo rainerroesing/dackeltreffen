@@ -99,9 +99,10 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
 
             <div className="flex-1 space-y-1">
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-semibold text-[#3C1775]">
-                  {dog.name}
-                </h3>
+           <h3
+  className="font-gazpacho text-2xl font-semibold text-[#3C1775]">
+  {dog.name}
+</h3>
                 <span className="inline-flex items-center gap-1 rounded-full bg-[#FFE7F0] px-2 py-0.5 text-[11px] font-medium text-[#D46FA3]">
                   {getGenderIcon(dog.gender)}
                 </span>
@@ -119,7 +120,7 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
             </div>
           </section>
         ) : (
-          <section className="flex items-start gap-4">
+          <section className="flex items-center gap-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#F5EEFF] text-2xl">
               🐾
             </div>
@@ -137,12 +138,12 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
         {/* ------- OWNER SECTION ------- */}
         <section className="space-y-2">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               {/* Owner Avatar SAME SIZE */}
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FFEFE6] text-xl">
                 {ownerGenderIcon}
               </div>
-              <div className="text-sm text-[#3C1775]">
+              <div className="text-sm font-bold text-[#3C1775]">
                 {owner.name} ({owner.age})
               </div>
             </div>
@@ -178,11 +179,11 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
 
           {/* Needs tags */}
           {owner.needs.length > 0 && (
-            <div className="flex flex-wrap gap-2 pl-14">
+            <div className="flex flex-wrap gap-2 pl-0">
               {owner.needs.map((need) => (
                 <span
                   key={need}
-                  className="inline-flex items-center rounded-full border border-[#F8D96A] bg-[#FFF6C7] px-3 py-1 text-[11px] font-medium text-[#7A5A00]"
+                  className="inline-flex items-center rounded-full border border-[#B9A2FF] border-2 bg-[#FFF8A6] px-3 py-1 text-[11px] font-bold uppercase text-[#6E5A9A]"
                 >
                   {need}
                 </span>
