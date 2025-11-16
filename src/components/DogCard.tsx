@@ -98,7 +98,7 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
 
               <p className="text-xs text-[#8A7BAF]">{getBreederLabel(dog)}</p>
 
-              <p className="pt-1 text-xs font-medium text-[#1B9D4A]">
+              <p className="pt-1 pb-2 text-xs font-medium text-[#1B9D4A]">
                 ✓ Compatible {dog.compatibility}
               </p>
             </div>
