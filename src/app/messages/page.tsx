@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageSquare, Trash2, Send } from "lucide-react";
+import { MessageSquare, Trash2, Send, ArrowLeft } from "lucide-react";
 
 type MessageBubble = {
   id: string;
@@ -77,12 +77,24 @@ function formatTime(iso: string) {
   });
 }
 
+// Helper, um Name + Hund immer gleich zu rendern
+function ThreadTitle(props: { name: string; dogName?: string }) {
+  const { name, dogName } = props;
+  return (
+    <span className="text-sm text-[#3C1775]">
+      <span className="font-semibold">{name}</span>
+      {dogName && <span className="font-normal"> mit {dogName}</span>}
+    </span>
+  );
+}
+
 export default function MessagesPage() {
   const [threads, setThreads] = useState<Thread[]>(initialThreads);
   const [selectedThreadId, setSelectedThreadId] = useState<string | null>(
     initialThreads[0]?.id ?? null
   );
   const [replyText, setReplyText] = useState("");
+  const [mobileView, setMobileView] = useState<"list" | "detail">("list");
 
   const selectedThread = threads.find((t) => t.id === selectedThreadId) || null;
 
@@ -98,14 +110,20 @@ export default function MessagesPage() {
       )
     );
     setSelectedThreadId(id);
+    setMobileView("detail"); // auf Mobile: in die Detailansicht springen
   }
 
   function handleDeleteThread(id: string) {
-    setThreads((prev) => prev.filter((t) => t.id !== id));
+    setThreads((prev) => {
+      const updated = prev.filter((t) => t.id !== id);
+      if (selectedThreadId === id) {
+        setSelectedThreadId(updated[0]?.id ?? null);
+      }
+      return updated;
+    });
 
-    if (selectedThreadId === id) {
-      const remaining = threads.filter((t) => t.id !== id);
-      setSelectedThreadId(remaining[0]?.id ?? null);
+    if (mobileView === "detail" && selectedThreadId === id) {
+      setMobileView("list");
     }
   }
 
@@ -141,14 +159,22 @@ export default function MessagesPage() {
 
   return (
     <div className="bg-[#F1EADA] w-full min-h-[calc(100vh-64px)]">
-      <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-4">
-        <header className="flex items-center justify-between">
-          
-        </header>
+      {/* flex + volle Höhe unter dem Header */}
+      <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col h-[calc(100vh-64px)]">
+       {/* <header className="flex items-center justify-between pb-2">
+          <div>
+            <h1 className="font-gazpacho text-3xl text-[#3C1775]">
+              Nachrichten
+            </h1>
+            <p className="text-xs text-[#6E5A9A]">
+              Unterhalte dich mit anderen Dackelmenschen.
+            </p>
+          </div>
+        </header>*/}
 
-        {/* Hauptbereich: Liste links, Chat rechts */}
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] gap-4 md:h-[70vh]">
-          {/* INBOX LISTE */}
+        {/* DESKTOP LAYOUT: always split view */}
+        <div className="hidden md:grid md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:gap-4 md:flex-1 md:min-h-0">
+          {/* INBOX LISTE DESKTOP */}
           <aside className="rounded-3xl border border-[#E3D9C8] bg-[#FFFDF8] overflow-hidden flex flex-col">
             <div className="px-4 py-3 border-b border-[#EEE1CC] flex items-center gap-2 text-sm text-[#3C1775]">
               <MessageSquare className="w-4 h-4" />
@@ -169,24 +195,15 @@ export default function MessagesPage() {
                         type="button"
                         onClick={() => handleSelectThread(thread.id)}
                         className={`w-full text-left px-4 py-3 flex flex-col gap-1 border-b border-[#F0E4D3] transition ${
-                          isActive
-                            ? "bg-[#F7F0E1]"
-                            : "hover:bg-[#FAF4E8]"
+                          isActive ? "bg-[#F7F0E1]" : "hover:bg-[#FAF4E8]"
                         }`}
                       >
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex flex-col">
-                            <span className="text-sm text-[#3C1775]">
-                              <span className="font-semibold">
-                                {thread.counterpartName}
-                              </span>
-                              {thread.counterDogName && (
-                                <span className="font-normal">
-                                  {" "}
-                                  mit {thread.counterDogName}
-                                </span>
-                              )}
-                            </span>
+                            <ThreadTitle
+                              name={thread.counterpartName}
+                              dogName={thread.counterDogName}
+                            />
                           </div>
                           <span className="text-[10px] text-[#A18C64]">
                             {formatTime(thread.updatedAt)}
@@ -197,7 +214,7 @@ export default function MessagesPage() {
                           <p className="text-xs text-[#7A6A4F] line-clamp-1">
                             {thread.lastMessagePreview}
                           </p>
-                          {/* Badge entfernt wie gewünscht */}
+                          {/* Kein Badge mehr */}
                         </div>
                       </button>
                     </li>
@@ -207,11 +224,11 @@ export default function MessagesPage() {
             )}
           </aside>
 
-          {/* CHAT-BEREICH */}
-          <section className="rounded-3xl border border-[#E3D9C8] bg-[#FFFDF8] flex flex-col">
+          {/* CHAT-BEREICH DESKTOP */}
+          <section className="rounded-3xl border border-[#E3D9C8] bg-[#FFFDF8] flex flex-col min-h-0">
             {selectedThread ? (
               <>
-                {/* Header der Konversation */}
+                {/* Header */}
                 <div className="px-4 py-3 border-b border-[#EEE1CC] flex items-center justify-between gap-3">
                   <div>
                     <h2 className="text-sm text-[#3C1775]">
@@ -237,7 +254,7 @@ export default function MessagesPage() {
                   </button>
                 </div>
 
-                {/* Nachrichtenverlauf */}
+                {/* Verlauf */}
                 <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm">
                   {selectedThread.messages.map((m) => (
                     <div
@@ -298,6 +315,139 @@ export default function MessagesPage() {
               </div>
             )}
           </section>
+        </div>
+
+        {/* MOBILE LAYOUT: zwei Schritte */}
+        <div className="md:hidden flex-1 min-h-0">
+          {mobileView === "list" || !selectedThread ? (
+            // MOBILE: NUR LISTE
+            <aside className="h-full rounded-3xl border border-[#E3D9C8] bg-[#FFFDF8] overflow-hidden flex flex-col">
+              <div className="px-4 py-3 border-b border-[#EEE1CC] flex items-center gap-2 text-sm text-[#3C1775]">
+                <MessageSquare className="w-4 h-4" />
+                <span>Inbox</span>
+              </div>
+
+              {threads.length === 0 ? (
+                <div className="flex-1 flex items-center justify-center p-4 text-xs text-[#7A6A4F]">
+                  Noch keine Nachrichten.
+                </div>
+              ) : (
+                <ul className="flex-1 overflow-y-auto">
+                  {threads.map((thread) => (
+                    <li key={thread.id}>
+                      <button
+                        type="button"
+                        onClick={() => handleSelectThread(thread.id)}
+                        className="w-full text-left px-4 py-3 flex flex-col gap-1 border-b border-[#F0E4D3] transition hover:bg-[#FAF4E8]"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="flex flex-col">
+                            <ThreadTitle
+                              name={thread.counterpartName}
+                              dogName={thread.counterDogName}
+                            />
+                          </div>
+                          <span className="text-[10px] text-[#A18C64]">
+                            {formatTime(thread.updatedAt)}
+                          </span>
+                        </div>
+
+                        <p className="text-xs text-[#7A6A4F] line-clamp-1">
+                          {thread.lastMessagePreview}
+                        </p>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </aside>
+          ) : (
+            // MOBILE: NUR DETAIL-VIEW
+            <section className="h-full rounded-3xl border border-[#E3D9C8] bg-[#FFFDF8] flex flex-col">
+              {/* Mobile Header mit Zurück */}
+              <div className="px-3 py-3 border-b border-[#EEE1CC] flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setMobileView("list")}
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[#E3D9C8] bg-white text-[#3C1775]"
+                  aria-label="Zurück zur Inbox"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                </button>
+                <div className="flex flex-col">
+                  <span className="text-xs uppercase tracking-wide text-[#A18C64]">
+                    Konversation
+                  </span>
+                  <h2 className="text-sm text-[#3C1775]">
+                    <span className="font-semibold">
+                      {selectedThread!.counterpartName}
+                    </span>
+                    {selectedThread!.counterDogName && (
+                      <span className="font-normal">
+                        {" "}
+                        mit {selectedThread!.counterDogName}
+                      </span>
+                    )}
+                  </h2>
+                </div>
+              </div>
+
+              {/* Verlauf */}
+              <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm">
+                {selectedThread!.messages.map((m) => (
+                  <div
+                    key={m.id}
+                    className={`flex ${
+                      m.fromMe ? "justify-end" : "justify-start"
+                    }`}
+                  >
+                    <div
+                      className={`max-w-[80%] rounded-2xl px-3 py-2 text-xs ${
+                        m.fromMe
+                          ? "bg-[#FF785A] text-white rounded-br-sm"
+                          : "bg-[#F5EEFF] text-[#3C1775] rounded-bl-sm"
+                      }`}
+                    >
+                      <p>{m.text}</p>
+                      <span className="mt-1 block text-[10px] opacity-70">
+                        {formatTime(m.createdAt)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+
+                {selectedThread!.messages.length === 0 && (
+                  <p className="text-xs text-[#7A6A4F]">
+                    Noch keine Nachrichten in diesem Chat.
+                  </p>
+                )}
+              </div>
+
+              {/* Antwortbereich */}
+              <form
+                className="border-t border-[#EEE1CC] px-3 py-2 flex items-end gap-2"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSendReply();
+                }}
+              >
+                <textarea
+                  rows={2}
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  placeholder="Antwort schreiben..."
+                  className="flex-1 resize-none rounded-2xl border border-[#E3D9C8] bg-white px-3 py-2 text-sm text-[#3C1775] placeholder:text-[#B8A48A] focus:outline-none focus:ring-2 focus:ring-[#B9A2FF]"
+                />
+                <button
+                  type="submit"
+                  disabled={!replyText.trim()}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF785A] text-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[#ff8b70] transition self-center"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </form>
+            </section>
+          )}
         </div>
       </div>
     </div>
