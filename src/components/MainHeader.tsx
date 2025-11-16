@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import LogoIcon from "./LogoIcon";
+import HeaderInboxButton from "./HeaderInboxButton";
 
 const navItems = [
   { label: "Dackel", href: "/" },       // Home
@@ -21,7 +22,7 @@ export default function MainHeader() {
 
   return (
     <header
-    className="fixed inset-x-0 top-0 z-[1000] bg-white border-b border-[#E0D4FF]"
+    className="fixed inset-x-0 top-0 z-[5000] bg-white border-b border-[#E0D4FF]"
       style={{ background: "#FFFFFF", borderColor: border }}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4">
@@ -101,13 +102,14 @@ export default function MainHeader() {
         </form>
 
         {/* LOGIN + AVATAR */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 pl-6">
           <button
             className="rounded-full border px-3 py-1 text-xs font-semibold transition"
             style={{ color: text, borderColor: border }}
           >
             Login
           </button>
+           <HeaderInboxButton unreadCount={3} />
 
           <button
             className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold text-white"

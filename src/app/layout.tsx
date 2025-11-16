@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="de">
-      <body className="bg-[#F1EADA] text-[#5E4B8B] overflow-hidden">
+      <body className="bg-[#F1EADA] text-[#5E4B8B] md:overflow-hidden">
         <MainHeader />
         {/* Bereich unterhalb des festen Headers */}
         <main className="pt-16 h-[calc(100vh-4rem)]">

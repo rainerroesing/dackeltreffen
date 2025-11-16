@@ -1,31 +1,61 @@
+// src/components/BenefitsBanner.tsx
 "use client";
 
-import { CheckCircle } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle, X } from "lucide-react";
 
 export default function BenefitsBanner() {
+  const [closed, setClosed] = useState(false);
+  if (closed) return null;
+
   const items = [
     "Finde Dackel in deiner Nähe",
-    "Organisiere Spaziergänge & Treffen",
-    "Baue deine lokale Community auf"
+    "Organisiere Treffen & Playdates",
+    "Finde Wurfgeschwister",
   ];
 
   return (
-    <div className="w-full bg-[#FF785A] text-white px-6 py-4">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div className="w-full bg-[#FF785A] text-white py-4 px-6 relative">
+      {/* Close Button – vertikal mittig positioniert */}
+      <button
+        onClick={() => setClosed(true)}
+        aria-label="Banner schließen"
+        className="
+          absolute right-4 top-1/2 -translate-y-1/2
+          p-1 rounded hover:bg-white/20 transition
+        "
+      >
+        <X className="h-5 w-5" />
+      </button>
 
-        {/* Bullet Points */}
-        <ul className="flex flex-col md:flex-row md:items-center gap-3 md:gap-6">
-          {items.map((item) => (
-            <li key={item} className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-white" />
-              <span className="font-medium">{item}</span>
+      <div
+        className="
+          max-w-5xl mx-auto
+          flex flex-col gap-4
+          md:flex-row md:items-center md:gap-8
+        "
+      >
+        {/* Bulletpoints */}
+        <ul className="flex flex-col gap-2 md:flex-row md:gap-6">
+          {items.map((text) => (
+            <li key={text} className="flex items-center font-bold gap-2 text-sm md:text-base">
+              <CheckCircle className="h-5 w-5 text-white" />
+              <span>{text}</span>
             </li>
           ))}
         </ul>
 
-        {/* Button */}
-        <button className="bg-white text-[#FF785A] font-semibold px-4 py-2 rounded-md hover:bg-slate-100 transition">
-          Jetzt kostenlos registrieren
+        {/* Registrieren Button */}
+        <button
+          className="
+            bg-white text-[#FF785A]
+            px-4 py-2 rounded
+            font-semibold text-sm md:text-base
+            hover:bg-white/90 transition
+            self-start md:self-auto
+          "
+        >
+          Jetzt registrieren
         </button>
       </div>
     </div>

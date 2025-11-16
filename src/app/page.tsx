@@ -33,7 +33,7 @@ export default function HomePage() {
 
       {/* Dieser Bereich füllt immer den Rest und enthält Map + Liste */}
       <div className="flex-1 w-full px-0 md:overflow-hidden">
-        <div className="grid grid-cols-1 md:grid-cols-3 w-full h-full md:gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full h-full">
           {/* LINKS: Map – 2/3, volle Höhe auf Desktop */}
           <div className="md:col-span-2 h-64 md:h-full">
             <ResultsMap results={mockResults} />
@@ -41,7 +41,7 @@ export default function HomePage() {
 
           {/* RECHTS: Liste – eigener Scroll + Headline */}
           <div className="md:col-span-1 h-full overflow-y-auto md:pb-4">
-            <h1 className="font-gazpacho text-3xl text-[#3C1775] px-4 pt-6">
+            <h1 className="font-gazpacho text-3xl text-[#3C1775] px-4 md:px-6 pt-6">
               Dackel in deiner Nähe
             </h1>
             <DogCardGrid />
