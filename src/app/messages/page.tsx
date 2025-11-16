@@ -143,14 +143,7 @@ export default function MessagesPage() {
     <div className="bg-[#F1EADA] w-full min-h-[calc(100vh-64px)]">
       <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-4">
         <header className="flex items-center justify-between">
-          <div>
-            <h1 className="font-gazpacho text-3xl text-[#3C1775]">
-              Nachrichten
-            </h1>
-            <p className="text-xs text-[#6E5A9A]">
-              Unterhalte dich mit anderen Dackelmenschen.
-            </p>
-          </div>
+          
         </header>
 
         {/* Hauptbereich: Liste links, Chat rechts */}
@@ -183,11 +176,16 @@ export default function MessagesPage() {
                       >
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex flex-col">
-                            <span className="text-sm font-semibold text-[#3C1775]">
-                              {thread.counterpartName}
-                              {thread.counterDogName
-                                ? ` & ${thread.counterDogName}`
-                                : ""}
+                            <span className="text-sm text-[#3C1775]">
+                              <span className="font-semibold">
+                                {thread.counterpartName}
+                              </span>
+                              {thread.counterDogName && (
+                                <span className="font-normal">
+                                  {" "}
+                                  mit {thread.counterDogName}
+                                </span>
+                              )}
                             </span>
                           </div>
                           <span className="text-[10px] text-[#A18C64]">
@@ -199,11 +197,7 @@ export default function MessagesPage() {
                           <p className="text-xs text-[#7A6A4F] line-clamp-1">
                             {thread.lastMessagePreview}
                           </p>
-                          {thread.unreadCount > 0 && (
-                            <span className="ml-2 inline-flex min-w-[18px] h-[18px] items-center justify-center rounded-full bg-[#3C1775] px-1 text-[10px] font-bold text-white">
-                              {thread.unreadCount}
-                            </span>
-                          )}
+                          {/* Badge entfernt wie gewünscht */}
                         </div>
                       </button>
                     </li>
@@ -220,15 +214,17 @@ export default function MessagesPage() {
                 {/* Header der Konversation */}
                 <div className="px-4 py-3 border-b border-[#EEE1CC] flex items-center justify-between gap-3">
                   <div>
-                    <h2 className="text-sm font-semibold text-[#3C1775]">
-                      {selectedThread.counterpartName}
-                      {selectedThread.counterDogName
-                        ? ` & ${selectedThread.counterDogName}`
-                        : ""}
+                    <h2 className="text-sm text-[#3C1775]">
+                      <span className="font-semibold">
+                        {selectedThread.counterpartName}
+                      </span>
+                      {selectedThread.counterDogName && (
+                        <span className="font-normal">
+                          {" "}
+                          mit {selectedThread.counterDogName}
+                        </span>
+                      )}
                     </h2>
-                    <p className="text-[11px] text-[#7A6A4F]">
-                      Letzte Aktivität: {formatTime(selectedThread.updatedAt)}
-                    </p>
                   </div>
 
                   <button

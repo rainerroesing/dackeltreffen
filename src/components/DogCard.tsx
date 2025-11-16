@@ -123,7 +123,7 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
         {/* ------- OWNER SECTION ------- */}
         <section className="space-y-2">
           <div className="flex items-center justify-between gap-2">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               {/* Owner Avatar */}
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#FFEFE6] text-xl">
                 {ownerGenderIcon}
