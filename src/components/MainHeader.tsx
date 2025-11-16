@@ -103,12 +103,12 @@ export default function MainHeader() {
 
         {/* LOGIN + AVATAR */}
         <div className="flex items-center gap-2 pl-6">
-          <button
+         {/* <button
             className="rounded-full border px-3 py-1 text-xs font-semibold transition"
             style={{ color: text, borderColor: border }}
           >
             Login
-          </button>
+          </button>*/}
            <HeaderInboxButton unreadCount={3} />
 
           <button
