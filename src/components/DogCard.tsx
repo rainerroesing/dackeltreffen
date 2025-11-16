@@ -88,7 +88,7 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
       className="flex h-full flex-col justify-between rounded-3xl border bg-[#FFFDF8] p-6 shadow-sm"
       style={{ borderColor: "#E3D9C8" }}
     >
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-4">
         {/* ------- DOG SECTION ------- */}
         {dog ? (
           <section className="flex items-start gap-4">
@@ -176,8 +176,12 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
 
 
           </div>
+</section>
+
+        <div className="h-px w-full bg-[#EEE1CC]" />
 
           {/* Needs tags */}
+          <section>
           {owner.needs.length > 0 && (
             <div className="flex flex-wrap gap-2 pl-0">
               {owner.needs.map((need) => (
@@ -191,10 +195,9 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
             </div>
           )}
         </section>
-      </div>
 
-      {/* ------- LOCATION FOOTER (divider moved down) ------- */}
-      <footer className="mt-6 flex flex-col items-center">
+          {/* ------- LOCATION FOOTER (divider moved down) ------- */}
+      <section className="flex flex-col items-center">
         <div className="h-px w-full bg-[#EEE1CC] mb-3" />
 
         <div className="flex items-center justify-center gap-2 text-xs text-[#7A6A4F]">
@@ -203,7 +206,11 @@ export default function DogCard({ dog, owner, location }: DogCardProps) {
             {location.district}, {location.street}
           </span>
         </div>
-      </footer>
+      </section>
+
+      </div>
+
+    
     </article>
   );
 }
