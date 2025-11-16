@@ -202,7 +202,7 @@ export default function MessagesPage() {
                           <div className="flex flex-col">
                             <ThreadTitle
                               name={thread.counterpartName}
-                              dogName={thread.counterDogName}
+                              dogName={thread.counterpartDogName}
                             />
                           </div>
                           <span className="text-[10px] text-[#A18C64]">
@@ -235,10 +235,10 @@ export default function MessagesPage() {
                       <span className="font-semibold">
                         {selectedThread.counterpartName}
                       </span>
-                      {selectedThread.counterDogName && (
+                      {selectedThread.counterpartDogName && (
                         <span className="font-normal">
                           {" "}
-                          mit {selectedThread.counterDogName}
+                          mit {selectedThread.counterpartDogName}
                         </span>
                       )}
                     </h2>
@@ -344,7 +344,7 @@ export default function MessagesPage() {
                           <div className="flex flex-col">
                             <ThreadTitle
                               name={thread.counterpartName}
-                              dogName={thread.counterDogName}
+                              dogName={thread.counterpartDogName}
                             />
                           </div>
                           <span className="text-[10px] text-[#A18C64]">
@@ -382,10 +382,10 @@ export default function MessagesPage() {
                     <span className="font-semibold">
                       {selectedThread!.counterpartName}
                     </span>
-                    {selectedThread!.counterDogName && (
+                    {selectedThread!.counterpartDogName && (
                       <span className="font-normal">
                         {" "}
-                        mit {selectedThread!.counterDogName}
+                        mit {selectedThread!.counterpartDogName}
                       </span>
                     )}
                   </h2>
