@@ -158,19 +158,10 @@ export default function MessagesPage() {
   }
 
   return (
-    <div className="bg-[#F1EADA] w-full min-h-[calc(100vh-64px)]">
+    <div className="bg-[#F1EADA] w-full">
       {/* flex + volle Höhe unter dem Header */}
-      <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col h-[calc(100vh-64px)]">
-       {/* <header className="flex items-center justify-between pb-2">
-          <div>
-            <h1 className="font-gazpacho text-3xl text-[#3C1775]">
-              Nachrichten
-            </h1>
-            <p className="text-xs text-[#6E5A9A]">
-              Unterhalte dich mit anderen Dackelmenschen.
-            </p>
-          </div>
-        </header>*/}
+      <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col h-[calc(100vh-64px)] md:h-[calc(100vh-98px)]">
+  
 
         {/* DESKTOP LAYOUT: always split view */}
         <div className="hidden md:grid md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:gap-4 md:flex-1 md:min-h-0">

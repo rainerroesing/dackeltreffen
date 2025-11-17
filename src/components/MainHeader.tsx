@@ -1,3 +1,4 @@
+// src/components/MainHeader.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -22,7 +23,7 @@ export default function MainHeader() {
 
   return (
     <header
-    className="fixed inset-x-0 top-0 z-[5000] bg-white border-b border-[#E0D4FF]"
+      className="fixed inset-x-0 top-0 z-[5000] bg-white border-b border-[#E0D4FF]"
       style={{ background: "#FFFFFF", borderColor: border }}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center px-4">
@@ -41,16 +42,15 @@ export default function MainHeader() {
         </button>
 
         {/* LOGO */}
-  <Link href="/" className="flex items-center gap-3">
-  <LogoIcon className="h-8 w-auto" />
-  <span
-    className="text-base font-gazpacho tracking-tight"
-    style={{ color: text }}
-  >
-    Dackeltreffen.de
-  </span>
-</Link>
-
+        <Link href="/" className="flex items-center gap-3">
+          <LogoIcon className="h-8 w-auto" />
+          <span
+            className="text-base font-gazpacho tracking-tight"
+            style={{ color: text }}
+          >
+            Dackeltreffen.de
+          </span>
+        </Link>
 
         {/* DESKTOP NAV */}
         <nav className="ml-4 hidden items-center gap-3 text-sm md:flex">
@@ -103,13 +103,13 @@ export default function MainHeader() {
 
         {/* LOGIN + AVATAR */}
         <div className="flex items-center gap-2 pl-6">
-         {/* <button
+          {/* <button
             className="rounded-full border px-3 py-1 text-xs font-semibold transition"
             style={{ color: text, borderColor: border }}
           >
             Login
           </button>*/}
-           <HeaderInboxButton unreadCount={3} />
+          <HeaderInboxButton unreadCount={3} />
 
           <button
             className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-semibold text-white"
@@ -173,6 +173,27 @@ export default function MainHeader() {
                 Los
               </button>
             </form>
+
+            {/* ➜ NEU: Impressum & Datenschutz NUR im mobilen Menü */}
+            <div
+              className="mt-4 pt-3 flex flex-col gap-1 border-t text-xs"
+              style={{ borderColor: border, color: text }}
+            >
+              <Link
+                href="/impressum"
+                className="rounded-lg px-2 py-2 hover:bg-[#F5F1FF]"
+                onClick={() => setMobileOpen(false)}
+              >
+                Impressum
+              </Link>
+              <Link
+                href="/datenschutz"
+                className="rounded-lg px-2 py-2 hover:bg-[#F5F1FF]"
+                onClick={() => setMobileOpen(false)}
+              >
+                Datenschutz
+              </Link>
+            </div>
           </nav>
         </div>
       )}

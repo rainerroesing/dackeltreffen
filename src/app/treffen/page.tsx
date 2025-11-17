@@ -100,7 +100,7 @@ export default function TreffenPage() {
   }, [typeFilter]);
 
   return (
-    <div className="bg-[#F1EADA] w-full">
+    <div className="bg-[#F1EADA] w-full pb-10">
       <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col gap-5">
         {/* Headline */}
         <header className="flex flex-col gap-1">

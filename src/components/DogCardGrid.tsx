@@ -68,7 +68,7 @@ const mockCards: DogCardProps[] = [
 export default function DogCardGrid() {
   return (
     <section className="mx-auto max-w-6xl px-4 md:px-6 py-6">
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-1 xl:grid-cols-1">
+      <div className="grid grid-cols-1 gap-6 pb-10 md:grid-cols-1 xl:grid-cols-1">
         {mockCards.map((card, idx) => (
           <DogCard key={idx} {...card} />
         ))}

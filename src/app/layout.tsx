@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import MainHeader from "@/components/MainHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
   title: "Dackeltreffen.de",
@@ -21,7 +22,10 @@ export default function RootLayout({
         <main className="pt-16 h-[calc(100vh-4rem)]">
           {children}
         </main>
+                <SiteFooter />
+
       </body>
     </html>
   );
 }
+
