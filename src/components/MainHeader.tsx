@@ -30,7 +30,7 @@ export default function MainHeader() {
         {/* BURGER BUTTON – mobile */}
         <button
           type="button"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-md border p-1 md:hidden"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-md mr-4 p-1 md:hidden"
           style={{ borderColor: border }}
           onClick={() => setMobileOpen((prev) => !prev)}
         >

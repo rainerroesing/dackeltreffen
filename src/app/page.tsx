@@ -27,7 +27,7 @@ export default function HomePage() {
 
   return (
     // Höhe = Viewport minus Header (64px bei h-16)
-    <div className="bg-[#F1EADA] w-full h-[calc(100vh-64px)] flex flex-col">
+    <div className="bg-[#F1EADA] w-full h-[calc(100vh-64px)] md:h-[calc(100vh-98px)] flex flex-col">
       {/* Banner optional */}
       {showBanner && <BenefitsBanner />}
 
