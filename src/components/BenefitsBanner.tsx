@@ -15,7 +15,7 @@ export default function BenefitsBanner() {
   ];
 
   return (
-    <div className="w-full bg-[#FF785A] text-white py-4 px-6 relative">
+    <div className="w-full bg-[#FF785A] text-white pr-10 py-4 px-6 relative">
       {/* Close Button – vertikal mittig positioniert */}
       <button
         onClick={() => setClosed(true)}
